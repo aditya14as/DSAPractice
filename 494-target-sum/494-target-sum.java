@@ -1,40 +1,32 @@
 class Solution {
-    public int findTargetSumWays(int[] arr, int target) {
-        int s =0;
-        for(int i=0; i<arr.length; i++){
-            s+=arr[i];
+    public int findTargetSumWays(int[] nums, int target) {
+        int sum =0;
+        for(int i=0; i<nums.length; i++){
+            sum+=nums[i];
         }
-        int sum= (s+target)/2;
-        
-        if(s+target<0 || (s+target)%2==1){
-            return 0;
+        int s= (sum+target)/2;
+        if(sum+target<0 || (sum+target)%2 ==1) return 0;
+        int[][] dp = new int[nums.length+1][s+1];
+        for(int i=0; i<dp.length; i++){
+            Arrays.fill(dp[i],-1);
         }
-        int n = arr.length;
-        int[][] t = new int[n+1][sum+1];
-        
-        for(int i=0;i<n+1;i++){
-            for(int j=0;j<sum+1;j++){
-                if(i==0){
-                    t[i][j] = 0;
-                }
-                if(j==0){
-                    t[i][j] = 1;
-                }
-            }
-        }
-        
-        // 'j' started from zero to handle multiple zeros input edge case
-        for(int i=1;i<n+1;i++){
-            for(int j=0;j<sum+1;j++){  // point 3.
-                if(arr[i-1]<= j){
-                    t[i][j] = t[i-1][j] + t[i-1][j-arr[i-1]];
-                }else{
-                    t[i][j] = t[i-1][j];
-                }
-            }
-        }
-        
-        return t[n][sum];
+        return solve(nums,s,nums.length,dp);
     }
     
+    public int solve(int[] arr, int sum,int n,int[][] dp){
+        if(n==0 && sum==0){
+            return 1;
+        }
+        if(n==0){
+            return 0;
+        }
+        if(dp[n][sum] != -1){
+            return dp[n][sum];
+        }
+        if(arr[n-1]>sum){
+            return dp[n][sum] = solve(arr,sum,n-1, dp);
+        }else{
+            return dp[n][sum] = solve(arr,sum,n-1,dp) + solve(arr,sum-arr[n-1],n-1,dp);
+        }
+    }
 }
