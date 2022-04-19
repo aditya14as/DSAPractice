@@ -36,12 +36,13 @@ class Solution{
 	    return x==Integer.MAX_VALUE-1 ? -1 : x;
 	} 
 	public int helper(int[] arr, int n, int v, int[][] dp){
-	    if(v==0 && n>0){
-	        return 0;
-	    }
 	    if(n==0){
 	        return Integer.MAX_VALUE -1;
 	    }
+	    if(v==0){
+	        return 0;
+	    }
+	    
 	    if(n==1){
 	        if(v%arr[0] == 0){
 	            return v/arr[0];
