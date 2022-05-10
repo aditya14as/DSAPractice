@@ -9,20 +9,25 @@
  * }
  */
 class Solution {
+    public static ListNode tail= null;
     public ListNode reverseList(ListNode head) {
         if(head==null || head.next ==null){
             return head;
         }
-        ListNode third = null;
-        ListNode second = head;
-        ListNode first = head.next;
-        while(first!=null){
-            second.next = third;
-            third = second;
-            second = first;
-            first = first.next;
+        ListNode first = head;
+        ListNode second= null;
+        recursive(first,second);
+        return tail;
+    }
+    public void recursive(ListNode first, ListNode second){
+        if(first.next == null){
+            tail= first;
+            return;
         }
-        second.next = third;
-        return second;
+        second = first;
+        first = first.next;
+        recursive(first,second);
+        first.next = second;
+        second.next = null;
     }
 }
