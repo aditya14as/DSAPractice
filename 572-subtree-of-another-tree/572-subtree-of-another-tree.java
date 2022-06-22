@@ -17,11 +17,12 @@ class Solution {
     public boolean ans = false;
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
        if(root!=null){
-           isSubtree(root.left,subRoot);
+           
            boolean temp = isMatch(root,subRoot);
            if(temp){
                ans = true;
            }
+           isSubtree(root.left,subRoot);
            isSubtree(root.right,subRoot);
        }
         return ans;
