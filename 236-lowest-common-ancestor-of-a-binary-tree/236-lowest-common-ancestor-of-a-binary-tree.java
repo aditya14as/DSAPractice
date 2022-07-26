@@ -8,47 +8,39 @@
  * }
  */
 class Solution {
-     
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {  
-       
-      List<TreeNode> list1 =   rootToNode(root,p);
-        List<TreeNode> list2 = rootToNode(root,q);
-        int i = list1.size()-1;
-        int j= list2.size()-1;
-        while(i>=0 && j>=0 && list1.get(i)==list2.get(j)){
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> f = nodeToRoot(root,p);
+        List<TreeNode> r = nodeToRoot(root,q);
+        int i= f.size()-1;
+        int j= r.size()-1;
+        while(i>=0 && j>=0 && f.get(i)==r.get(j)){
             i--;
             j--;
         }
-        i++;
-        
-        return list1.get(i);
-        
+        return f.get(i+1);
     }
-    public ArrayList<TreeNode> rootToNode(TreeNode root, TreeNode p){
-        if(root==p) {
-		ArrayList<TreeNode> node = new ArrayList<>();
-		node.add(root);
-		return node;
-	}
-
-	if(root.left!=null){
-		ArrayList<TreeNode> node = rootToNode(root.left,p);
-		if(node.size()>0){
-			node.add(root);
-			 return node;
-		}
-
-	}
-
-	if(root.right!=null){
-		ArrayList<TreeNode> node = rootToNode(root.right,p);
-		if(node.size()>0){
-			node.add(root);
-			return node;
-		}
-
-	}
-
-	return new ArrayList<>();
+    public List<TreeNode> nodeToRoot(TreeNode root, TreeNode node){
+        if(root==null){
+            return new ArrayList<>();
+        }
+        if(root==node){
+            List<TreeNode> list = new ArrayList<>();
+            list.add(root);
+            return list;
+        }
+        if(root.left!=null){
+            
+        }
+        List<TreeNode> ll = nodeToRoot(root.left, node);
+        if(ll.size()>0){
+            ll.add(root);
+            return ll;
+        }
+        List<TreeNode> rl = nodeToRoot(root.right, node);
+        if(rl.size()>0){
+            rl.add(root);
+            return rl;
+        }
+        return new ArrayList<>();
     }
 }
