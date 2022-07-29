@@ -8,10 +8,31 @@ class Solution {
         }
         return list;
     }
-    public boolean checkPattern(String word,String pattern){
-        for(int i=0; i<word.length();i++){
-            if(word.indexOf(word.charAt(i)) != pattern.indexOf(pattern.charAt(i))){
-                return false;
+    // public boolean checkPattern(String word,String pattern){
+    //     for(int i=0; i<word.length();i++){
+    //         if(word.indexOf(word.charAt(i)) != pattern.indexOf(pattern.charAt(i))){
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+    
+    public boolean checkPattern(String word, String pattern){
+        HashMap<Character,Character> map = new HashMap<>();
+        HashSet<Character> set = new HashSet<>();
+        for(int i=0; i<word.length(); i++){
+            char wch = word.charAt(i);
+            char pch = pattern.charAt(i);
+            if(map.containsKey(pch)){
+                if(map.get(pch)!=wch){
+                    return false;
+                }
+            }else{
+                if(set.contains(wch)){
+                    return false;
+                }
+                map.put(pch,wch);
+                set.add(wch);
             }
         }
         return true;
