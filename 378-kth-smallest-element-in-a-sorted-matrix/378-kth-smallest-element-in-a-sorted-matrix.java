@@ -14,18 +14,23 @@ class Solution {
         }
         return low;
     }
-    public int lessEqualHelper(int[][] matrix,int mid){
-        int i=matrix.length-1;
-        int j=0;
-        int c=0;
-        while(i>=0 && j<matrix.length){
-            if(mid<matrix[i][j]){
-                i--;
-            }else{
-                c= c+i+1;
-                j++;
+    public int lessEqualHelper(int[][] matrix,int target){
+        //Applying binary search on each row for finding how many number smaller than target 
+        //after for loop ends we return all the numbers smaller than target
+        int ans = 0;
+        for(int i=0; i<matrix.length; i++){
+            int low = 0;
+            int high = matrix[0].length-1;
+            while(low<=high){
+               int mid = low+(high-low)/2;
+                if(matrix[i][mid]<=target){
+                    low=mid+1;
+                }else{
+                    high = mid-1;
+                }
             }
+            ans = ans +low;
         }
-        return c;
+        return ans;
     }
 }
