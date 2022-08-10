@@ -22,7 +22,6 @@ class Solution {
             return null;
         }
         int mid = start + (end-start)/2;
-        
         TreeNode left = helper(nums,start,mid-1);
         TreeNode right = helper(nums,mid+1,end);
         TreeNode root = new TreeNode(nums[mid],left,right);
