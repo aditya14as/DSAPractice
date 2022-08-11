@@ -13,31 +13,23 @@
  *     }
  * }
  */
-class Pair{
-    long max;
-    long min;
-    boolean isBST;
-}
-
 class Solution {
+    public List<Integer> list = new ArrayList<>();
     public boolean isValidBST(TreeNode root) {
-        Pair ans = helper(root);
-        return ans.isBST;
-    }
-    public Pair helper(TreeNode root){
-        if(root==null){
-            Pair p = new Pair();
-            p.max =Long.MIN_VALUE;
-            p.min = Long.MAX_VALUE;
-            p.isBST = true;
-            return p;
+        helper(root);
+        for(int i=0; i<list.size()-1;i++){
+            if(list.get(i)>=list.get(i+1)){
+                return false;
+            }
         }
-        Pair lp = helper(root.left);
-        Pair rp = helper(root.right);
-        Pair mp = new Pair();
-        mp.max = Math.max(lp.max,Math.max(rp.max,root.val));
-        mp.min = Math.min(lp.min,Math.min(rp.min,root.val));
-        mp.isBST = (lp.isBST && rp.isBST && (lp.max<root.val && rp.min > root.val));
-        return mp;
+        return true;
+    }
+    public void helper(TreeNode root){
+        if(root==null){
+            return;
+        }
+        helper(root.left);
+        list.add(root.val);
+        helper(root.right);
     }
 }
