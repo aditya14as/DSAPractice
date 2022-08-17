@@ -13,12 +13,16 @@ class Solution {
             return dp[i][j];
         }
         int take = 0;
+        //We are increasing value of take if value of both the array are equal
         if(nums1[i]==nums2[j]){
             take=1+helper(nums1,nums2,i+1,j+1,dp);
+            //Here, We put maxiumum value of take in our ans
             ans = Math.max(ans,take);
         }
+        //Subarray are successive, so if values are not equal then we doesn't need to count that part
         helper(nums1,nums2,i+1,j,dp);
         helper(nums1,nums2,i,j+1,dp);
+        //lastly we return the value of take for memoization 
         return dp[i][j]=take;
     }
 }
