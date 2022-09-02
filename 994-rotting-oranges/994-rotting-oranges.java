@@ -7,7 +7,7 @@ class Solution {
         for(int i=0; i<grid.length; i++){
             for(int j=0; j<grid[0].length; j++){
                 if(grid[i][j]==2){
-                    q.add(new Pair(i,j,0));
+                    q.add(new Pair(i,j));
                     visited[i][j]=true;
                     rotten++;
                 }
@@ -34,12 +34,11 @@ class Solution {
                 Pair p = q.remove();
                 int row = p.row;
                 int col = p.col;
-                int time = p.time;
                 for(int j=0; j<4; j++){
                     int nrow = row+drow[j];
                     int ncol = col + dcol[j];
                     if(nrow>=0 && ncol >=0 && nrow<grid.length && ncol<grid[0].length && visited[nrow][ncol]==false && grid[nrow][ncol]==1){
-                        q.add(new Pair(nrow,ncol,time+1));
+                        q.add(new Pair(nrow,ncol));
                         visited[nrow][ncol]=true;
                         f++;
                     }
@@ -59,10 +58,8 @@ class Solution {
 class Pair{
     int row;
     int col;
-    int time;
-    Pair(int row, int col, int time){
+    Pair(int row, int col){
         this.row = row;
         this.col = col;
-        this.time = time;
     }
 }
