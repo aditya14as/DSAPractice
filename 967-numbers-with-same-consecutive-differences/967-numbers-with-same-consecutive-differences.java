@@ -18,12 +18,14 @@ class Solution {
         
         int digit = number%10;
         if(digit-k>=0){
-            
-            helper(n-1,k,number*10+digit-k,ans);
+            number = number*10 + digit-k;
+            helper(n-1,k,number,ans);
+            number = (number- (digit-k))/10;
         }
         if(digit+k<=9 && (digit-k != digit+k)){
-           
-            helper(n-1,k,number*10+digit+k,ans);
+           number = number*10 + digit+k;
+            helper(n-1,k,number,ans);
+            number = (number- (digit+k))/10;
         }
         return;
     }
