@@ -17,6 +17,7 @@ class Solution {
         q.add(new Pair(i,0));
         while(q.size()>0){
             Pair p= q.remove();
+            System.out.println(p);
             if(visited[p.e]==-1){
                 visited[p.e]=p.level;
             }else{
