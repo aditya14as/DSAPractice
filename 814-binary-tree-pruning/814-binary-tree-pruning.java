@@ -18,11 +18,13 @@ class Solution {
         if(root==null){
             return root;
         }
-        root.left = pruneTree(root.left);
-        root.right = pruneTree(root.right);
-        if(root.left == null && root.right ==null && root.val==0){
+        TreeNode l = pruneTree(root.left);
+        TreeNode r = pruneTree(root.right);
+        if(l == null && r ==null && root.val==0){
             return null;
         }
+        root.left = l;
+        root.right = r;
         return root;
     }
 }
