@@ -17,44 +17,33 @@ class Solution {
     int count = 0;
 
     public int pseudoPalindromicPaths(TreeNode root) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        dfs(root, map);
+        int[] arr = new int[10];
+        dfs(root, arr);
         return count;
     }
 
-    public void dfs(TreeNode root, HashMap<Integer, Integer> map) {
+    public void dfs(TreeNode root, int[] arr) {
         if (root == null) {
             return;
         }
         if (root.left == null && root.right == null) {
-            map.put(root.val, map.getOrDefault(root.val, 0) + 1);
-            if (helper(map)) {
+            arr[root.val]++;
+            if (helper(arr)) {
                 count++;
             }
-            if (map.get(root.val) == 1) {
-                map.remove(root.val);
-            } else {
-                map.put(root.val, map.get(root.val) - 1);
-            }
+            arr[root.val]--;
             return;
         }
-        map.put(root.val, map.getOrDefault(root.val, 0) + 1);
-        dfs(root.left, map);
-        dfs(root.right, map);
-        if (map.get(root.val) == 1) {
-            map.remove(root.val);
-        } else {
-            map.put(root.val, map.get(root.val) - 1);
-        }
+        arr[root.val]++;
+        dfs(root.left, arr);
+        dfs(root.right, arr);
+        arr[root.val]--;
     }
 
-    public boolean helper(HashMap<Integer, Integer> map) {
+    public boolean helper(int[] arr) {
         int oddCount = 0;
-        for (Map.Entry<Integer, Integer> set : map.entrySet()) {
-            // Printing all elements of a Map
-            // System.out.println(set.getKey() + " = "
-            //                    + set.getValue());
-            if (set.getValue() % 2 == 1) {
+        for(int i=0; i<10; i++){
+            if(arr[i]%2==1){
                 oddCount++;
             }
         }
