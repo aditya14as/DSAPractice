@@ -26,7 +26,7 @@ class Solution {
                     int ld = Math.abs(arr[left]-x);
                     int rd = Math.abs(arr[right]-x);
                     if(ld<=rd){
-                        list.add(0,arr[left]);
+                        list.add(arr[left]);
                         left--;
                     }else{
                         list.add(arr[right]);
