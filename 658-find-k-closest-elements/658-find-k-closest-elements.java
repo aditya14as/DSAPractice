@@ -20,13 +20,13 @@ class Solution {
                     list.add(arr[right]);
                     right++;
                 }else if(right>=n){
-                    list.add(arr[left]);
+                    list.add(0,arr[left]);
                     left--;
                 }else{
                     int ld = Math.abs(arr[left]-x);
                     int rd = Math.abs(arr[right]-x);
                     if(ld<=rd){
-                        list.add(arr[left]);
+                        list.add(0,arr[left]);
                         left--;
                     }else{
                         list.add(arr[right]);
@@ -36,7 +36,7 @@ class Solution {
                 count++;
             }
         }
-        Collections.sort(list);
+        // Collections.sort(list);
         return list;
     }
     public int binarySearch(int[] arr, int start , int end,int target){
