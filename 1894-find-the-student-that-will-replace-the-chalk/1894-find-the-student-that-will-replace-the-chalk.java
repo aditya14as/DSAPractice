@@ -7,8 +7,6 @@ class Solution {
             
         }
         long sum = pre[pre.length-1];
-        System.out.println(Arrays.toString(pre));
-        
         int idx = binarySearch(pre,0,pre.length-1,(int)(k%sum));
         return idx==pre.length?0:idx;
     }
