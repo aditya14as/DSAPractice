@@ -1,26 +1,28 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        Integer[][] dp = new Integer[nums.length][nums.length];
-        return helper(nums,0,-1,dp);
+        List<Integer> list = new ArrayList<>();
+        list.add(nums[0]);
+        for(int i=1; i<nums.length; i++){
+            if(list.get(list.size()-1)<nums[i]){
+                list.add(nums[i]);
+            }else{
+                int idx = binarySearch(list,0,list.size()-1,nums[i]);
+                list.set(idx,nums[i]);
+            }
+        }
+        return list.size();
     }
-    public int helper(int[] nums,int i,int prev, Integer[][] dp){
-        if(i==nums.length){
-            return 0;
+    public int binarySearch(List<Integer> list, int start, int end, int target){
+        while(start<=end){
+            int mid = start + (end-start)/2;
+            if(list.get(mid)==target){
+                return mid;
+            }else if(list.get(mid)<target){
+                start = mid+1;
+            }else{
+                end = mid-1;
+            }
         }
-        if(prev!= -1 && dp[i][prev]!=null){
-            return dp[i][prev];
-        }
-        
-        int notTaken = helper(nums,i+1,prev,dp);
-        int taken = Integer.MIN_VALUE;
-        if(prev == -1 || nums[prev]<nums[i]){
-            taken = 1 + helper(nums,i+1,i,dp);
-        }
-       int value = Math.max(taken,notTaken);
-        if(prev!=-1){
-            dp[i][prev] = value;
-            return dp[i][prev];
-        }
-        return value;
+        return start;
     }
 }
