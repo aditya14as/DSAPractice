@@ -10,6 +10,7 @@ class Solution {
         if(prev!= -1 && dp[i][prev]!=null){
             return dp[i][prev];
         }
+        
         int notTaken = helper(nums,i+1,prev,dp);
         int taken = Integer.MIN_VALUE;
         if(prev == -1 || nums[prev]<nums[i]){
