@@ -12,19 +12,29 @@ class Solution {
                 q.pop();
             }
         }
-        String ans = "";
+        // String ans = "";
+        // int l = q.size();
+        // for(int i=0; i<l; i++){
+        //     Pair p = q.pop();
+        //     for(int j=0; j<p.freq; j++){
+        //         ans += p.ch;
+        //     }
+        // }
+        // String ans2 = "";
+        // for(int i=0; i<ans.length(); i++){
+        //     ans2+=ans.charAt(ans.length()-1-i);
+        // }
+        // return ans2;
+        StringBuilder sb = new StringBuilder();
         int l = q.size();
-        for(int i=0; i<l; i++){
-            Pair p = q.pop();
-            for(int j=0; j<p.freq; j++){
-                ans += p.ch;
-            }
-        }
-        String ans2 = "";
-        for(int i=0; i<ans.length(); i++){
-            ans2+=ans.charAt(ans.length()-1-i);
-        }
-        return ans2;
+		while (l>0) {
+			Pair top = q.pop();
+			while (top.freq-- > 0) {
+				sb.append(top.ch);
+			}
+            l--;
+		}
+        return sb.reverse().toString();
     }
 }
 class Pair{
