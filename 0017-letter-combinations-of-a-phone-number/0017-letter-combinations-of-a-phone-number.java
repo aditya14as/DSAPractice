@@ -14,7 +14,7 @@ class Solution {
             }
         }
         int digit = (digits.charAt(0)-'0');
-        System.out.println(digit);
+        // System.out.println(digit);
         if(digit!=7 && digit!=8 && digit!=9){
             for(int i = (digit-2)*3; i<(digit-1)*3; i++){
                 char ch = (char)('a'+i);
