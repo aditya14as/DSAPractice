@@ -12,27 +12,26 @@ class Solution {
                 ans.add(temp);
                 return;
             }
-            
         }
-        int digit = (digits.charAt(0)-'0')-1;
+        int digit = (digits.charAt(0)-'0');
         System.out.println(digit);
-        if(digit!=6 && digit!=7 && digit!=8){
-            for(int i = (digit-1)*3; i<digit*3; i++){
-                char ch = (char)('a'+i);
-                helper(digits.substring(1),temp+ch);
-            }
-        }else if(digit==6){
-            for(int i = (digit-1)*3; i<=digit*3; i++){
+        if(digit!=7 && digit!=8 && digit!=9){
+            for(int i = (digit-2)*3; i<(digit-1)*3; i++){
                 char ch = (char)('a'+i);
                 helper(digits.substring(1),temp+ch);
             }
         }else if(digit==7){
-            for(int i = (digit-1)*3+1; i<=digit*3; i++){
+            for(int i = (digit-2)*3; i<=(digit-1)*3; i++){
+                char ch = (char)('a'+i);
+                helper(digits.substring(1),temp+ch);
+            }
+        }else if(digit==8){
+            for(int i = (digit-2)*3+1; i<=(digit-1)*3; i++){
                 char ch = (char)('a'+i);
                 helper(digits.substring(1),temp+ch);
             }
         }else{
-            for(int i = (digit-1)*3+1; i<=digit*3+1; i++){
+            for(int i = (digit-2)*3+1; i<=(digit-1)*3+1; i++){
                 char ch = (char)('a'+i);
                 helper(digits.substring(1),temp+ch);
             }
