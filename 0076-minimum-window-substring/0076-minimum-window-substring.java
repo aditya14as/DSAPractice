@@ -1,39 +1,35 @@
 class Solution {
-
     public String minWindow(String s, String t) {
         int[] map = new int[128];
-        for (int i = 0; i < t.length(); i++) {
+        for(int i=0; i<t.length(); i++){
             map[t.charAt(i)]++;
         }
         int i = 0;
         int j = 0;
-        int min = Integer.MAX_VALUE;
         int start = 0;
         int end = 0;
+        int min = Integer.MAX_VALUE;
         int req = t.length();
         int curr = 0;
-       
-        while (j < s.length()) {
-            char ch = s.charAt(j);
-            if(map[ch]>0){
-                curr++;
+        while(j<s.length()){
+            char c = s.charAt(j);
+            if(map[c]>0){
+                curr ++;
             }
-            map[ch]--;
+            map[c]--;
             j++;
-            while (curr == req) {
-                if(j-i < min && curr==req){
+            while(curr == req){
+                if(j-i < min ){
                     start = i;
                     end = j;
-                    min = j-i;
+                    min = j-i ;
                 }
-                char c = s.charAt(i);
-                map[c]++;
-                if(map[c]>0){
+                map[s.charAt(i)]++;
+                if(map[s.charAt(i)]>0){
                     curr--;
                 }
                 i++;
             }
-            
         }
         if(min == Integer.MAX_VALUE) return "";
         return s.substring(start,end);
