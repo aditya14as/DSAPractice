@@ -52,8 +52,10 @@ class Pair implements Comparable<Pair> {
     }
 
     public int compareTo(Pair o) {
-        
+        if (this.dis == o.dis) {
+            return this.obs - o.obs;
+        } else {
             return this.dis - o.dis;
-        
+        }
     }
 }
