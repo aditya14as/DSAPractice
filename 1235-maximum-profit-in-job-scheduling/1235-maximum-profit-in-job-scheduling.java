@@ -14,7 +14,7 @@ class Solution {
         return dfs(arr,0,n);
     }
     public int dfs(int[][] arr, int i,int n){
-        if(i>=n){
+        if(i>=n || i<0){
             return 0;
         }
         if(dp[i]!=null){
