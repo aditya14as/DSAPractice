@@ -8,13 +8,13 @@ class Solution {
             arr[i]=new int[]{startTime[i],endTime[i],profit[i]};
         }
         Arrays.sort(arr,(a,b)-> a[0]-b[0]);
-       // for(int i=0; i<n; i++){
-       //       System.out.println(Arrays.toString(arr[i]));
-       //  }
+       for(int i=0; i<n; i++){
+             System.out.println(Arrays.toString(arr[i]));
+        }
         return dfs(arr,0,n);
     }
     public int dfs(int[][] arr, int i,int n){
-        if(i>=n || i<0){
+        if(i>=n){
             return 0;
         }
         if(dp[i]!=null){
@@ -22,8 +22,6 @@ class Solution {
         }
         int notTake = dfs(arr,i+1,n);
         int newI = binarySearch(arr,i+1,n-1,arr[i][1]);
-        // System.out.println(newI);
-        // int take = 0;
         int take = arr[i][2]+ dfs(arr,newI,n);
         return dp[i] = Math.max(notTake,take);
     }
