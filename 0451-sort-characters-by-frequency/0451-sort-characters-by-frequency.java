@@ -8,14 +8,14 @@ class Solution {
         for(Map.Entry<Character,Integer> i : map.entrySet()){
             pq.add(new Pair(i.getKey(),i.getValue()));
         }
-        String ans = "";
+        StringBuilder ans = new StringBuilder();
         for(int i = 0; i<map.size(); i++){
             char ch = pq.poll().ch;
             for(int j = 0; j<map.get(ch); j++){
-                ans = ans + ch;
+                ans.append(ch);
             }
         }
-        return ans;
+        return ans.toString();
     }
 }
 class Pair implements Comparable<Pair>{
