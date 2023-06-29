@@ -39,27 +39,39 @@ class Solution {
         boolean[] vis = new boolean[V];
         for(int i=0; i<V; i++){
             if(!vis[i]){
-                if(bfs(adj,i,vis)){
+                if(dfs(adj,i,vis,-1)){
                     return true;
                 }
             }
         }
         return false;
     }
-    public boolean bfs(ArrayList<ArrayList<Integer>> adj,int i,boolean[] vis){
-        vis[i] = true;
-        Queue<int[]> q = new ArrayDeque<>();
-        q.add(new int[]{i,-1});
-        while(q.size()>0){
-            int[] a = q.remove();
-            for(int j=0; j<adj.get(a[0]).size(); j++){
-                if(!vis[adj.get(a[0]).get(j)]){
-                    vis[adj.get(a[0]).get(j)]=true;
-                    q.add(new int[]{adj.get(a[0]).get(j),a[0]});
-                }
-                else if(vis[adj.get(a[0]).get(j)] && adj.get(a[0]).get(j) != a[1] ){
+    public boolean dfs(ArrayList<ArrayList<Integer>> adj,int i,boolean[] vis,int p){
+        // vis[i] = true;
+        // Queue<int[]> q = new ArrayDeque<>();
+        // q.add(new int[]{i,-1});
+        // while(q.size()>0){
+        //     int[] a = q.remove();
+        //     for(int j=0; j<adj.get(a[0]).size(); j++){
+        //         if(!vis[adj.get(a[0]).get(j)]){
+        //             vis[adj.get(a[0]).get(j)]=true;
+        //             q.add(new int[]{adj.get(a[0]).get(j),a[0]});
+        //         }
+        //         else if(vis[adj.get(a[0]).get(j)] && adj.get(a[0]).get(j) != a[1] ){
+        //             return true;
+        //         }
+        //     }
+        // }
+        // return false;
+        
+        vis[i]=true;
+        for(int j=0; j<adj.get(i).size(); j++){
+            if(!vis[adj.get(i).get(j)]){
+                if(dfs(adj,adj.get(i).get(j),vis,i)){
                     return true;
                 }
+            }else if(vis[adj.get(i).get(j)] && p!=adj.get(i).get(j)){
+                return true;
             }
         }
         return false;
